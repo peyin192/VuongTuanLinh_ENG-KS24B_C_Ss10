@@ -1,38 +1,47 @@
-#include <stdio.h>
-int main() {
-    int row, col;
-
-    printf("Nhap so dong: ");
+#include<stdio.h>
+int main(void){
+   int row, col;
+    printf("moi ban nhap so dong cua mang: ");
     scanf("%d", &row);
-    printf("Nhap so cot: ");
+    printf("moi ban nhap so cot cua mang: ");
     scanf("%d", &col);
-
     int arr[row][col];
-
-    printf("Nhap mang: ");
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < col; j++) {
-            printf("arr[%d][%d]: ", i, j);
+    for(int i=0; i<row; i++){
+        for(int j=0; j<col; j++){
+            printf("moi ban nhap phan tu arr[%d][%d]:  ", i, j);
             scanf("%d", &arr[i][j]);
         }
     }
-
-    int diagonal[row];
-    for (int i = 0; i < row; i++) {
-        diagonal[i] = arr[i][col - 1 - i];
-    }
-
-
-    for (int i = 0; i < row; i++) {
-        arr[i][col - 1 - i] = diagonal[i];
-    }
-
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < col; j++) {
+    
+    for(int i=0; i<row; i++){
+        for(int j=0; j<col; j++){
             printf("%d ", arr[i][j]);
         }
         printf("\n");
     }
-
+    printf("mang sau khi sap xep duong cheo chinh la:\n");
+    if(row != col){
+        printf("mang khong co duong cheo chinh \n");
+    }else{
+        for(int k=0; k<row; k++){
+            for(int i=0; i<row; i++){
+                for(int j=col; j>0; j--){
+                    if(j== col-i-1){
+                        if(arr[i][j]>arr[i+1][j-1]){
+                            int key= arr[i][j];
+                            arr[i][j]=arr[i+1][j-1];
+                            arr[i+1][j-1]= key;
+                        }
+                    }
+                }
+            }
+        }
+        for(int i=0; i<row; i++){
+            for(int j=0; j<col; j++){
+                printf("%d   ", arr[i][j]);
+            }
+            printf("\n");
+        }
+    }
     return 0;
 }
